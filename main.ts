@@ -6,9 +6,9 @@ namespace SpriteKind {
  * 
  * - add wall kicks, SRS stuff, rotation checks
  * 
- * - add line clearing
- * 
  * - maaaybe add ghost blocks
+ * 
+ * - if you have time, add scoring
  */
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     hardDrop = 0
@@ -22,6 +22,127 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         tetriminoDirection = 4
     }
     render_tetrimino()
+    if (overlap_check()) {
+        tetriminoRotationCheckX = tetrimino.x
+        tetriminoRotationCheckY = tetrimino.y
+        if (tetriminoType == "I") {
+            if (tetriminoDirection == 1) {
+                tetrimino.x += 12
+            } else if (tetriminoDirection == 2) {
+                tetrimino.x += 6
+            } else if (tetriminoDirection == 3) {
+                tetrimino.x += -12
+            } else if (tetriminoDirection == 4) {
+                tetrimino.x += -6
+            }
+            if (overlap_check()) {
+                tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                if (tetriminoDirection == 1) {
+                    tetrimino.x += -12
+                } else if (tetriminoDirection == 2) {
+                    tetrimino.x += 6
+                } else if (tetriminoDirection == 3) {
+                    tetrimino.x += 12
+                } else if (tetriminoDirection == 4) {
+                    tetrimino.x += -6
+                }
+                if (overlap_check()) {
+                    tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                    if (tetriminoDirection == 1) {
+                        tetrimino.x += 6
+                        tetrimino.y += 12
+                    } else if (tetriminoDirection == 2) {
+                        tetrimino.x += -12
+                        tetrimino.y += 6
+                    } else if (tetriminoDirection == 3) {
+                        tetrimino.x += -6
+                        tetrimino.y += -12
+                    } else if (tetriminoDirection == 4) {
+                        tetrimino.x += 12
+                        tetrimino.y += -6
+                    }
+                    if (overlap_check()) {
+                        tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        if (tetriminoDirection == 1) {
+                            tetrimino.x += -12
+                            tetrimino.y += -6
+                        } else if (tetriminoDirection == 2) {
+                            tetrimino.x += 6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 3) {
+                            tetrimino.x += 12
+                            tetrimino.y += 6
+                        } else if (tetriminoDirection == 4) {
+                            tetrimino.x += -6
+                            tetrimino.y += 12
+                        }
+                        if (overlap_check()) {
+                            tetriminoDirection += -1
+                            if (tetriminoDirection == 0) {
+                                tetriminoDirection = 4
+                            }
+                            render_tetrimino()
+                            tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        }
+                    }
+                }
+            }
+        } else {
+            if (tetriminoDirection == 1 || tetriminoDirection == 2) {
+                tetrimino.x += -6
+            } else if (tetriminoDirection == 3 || tetriminoDirection == 4) {
+                tetrimino.x += 6
+            }
+            if (overlap_check()) {
+                tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                if (tetriminoDirection == 1) {
+                    tetrimino.x += -6
+                    tetrimino.y += 6
+                } else if (tetriminoDirection == 2) {
+                    tetrimino.x += -6
+                    tetrimino.y += -6
+                } else if (tetriminoDirection == 3) {
+                    tetrimino.x += 6
+                    tetrimino.y += 6
+                } else if (tetriminoDirection == 4) {
+                    tetrimino.x += 6
+                    tetrimino.y += -6
+                }
+                if (overlap_check()) {
+                    tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                    if (tetriminoDirection == 1 || tetriminoDirection == 3) {
+                        tetrimino.y += -12
+                    } else if (tetriminoDirection == 2 || tetriminoDirection == 4) {
+                        tetrimino.y += 12
+                    }
+                    if (overlap_check()) {
+                        tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        if (tetriminoDirection == 1) {
+                            tetrimino.x += -6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 2) {
+                            tetrimino.x += -6
+                            tetrimino.y += 12
+                        } else if (tetriminoDirection == 3) {
+                            tetrimino.x += 6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 4) {
+                            tetrimino.x += 6
+                            tetrimino.y += 12
+                        }
+                        if (overlap_check()) {
+                            tetriminoDirection += -1
+                            if (tetriminoDirection == 0) {
+                                tetriminoDirection = 4
+                            }
+                            render_tetrimino()
+                            tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        }
+                    }
+                }
+            }
+        }
+    }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     tetriminoDirection += 1
@@ -29,18 +150,132 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         tetriminoDirection = 1
     }
     render_tetrimino()
+    if (overlap_check()) {
+        tetriminoRotationCheckX = tetrimino.x
+        tetriminoRotationCheckY = tetrimino.y
+        if (tetriminoType == "I") {
+            if (tetriminoDirection == 1) {
+                tetrimino.x += 6
+            } else if (tetriminoDirection == 2) {
+                tetrimino.x += -12
+            } else if (tetriminoDirection == 3) {
+                tetrimino.x += -6
+            } else if (tetriminoDirection == 4) {
+                tetrimino.x += 12
+            }
+            if (overlap_check()) {
+                tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                if (tetriminoDirection == 1) {
+                    tetrimino.x += -12
+                } else if (tetriminoDirection == 2) {
+                    tetrimino.x += 6
+                } else if (tetriminoDirection == 3) {
+                    tetrimino.x += 12
+                } else if (tetriminoDirection == 4) {
+                    tetrimino.x += -6
+                }
+                if (overlap_check()) {
+                    tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                    if (tetriminoDirection == 1) {
+                        tetrimino.x += 6
+                        tetrimino.y += 12
+                    } else if (tetriminoDirection == 2) {
+                        tetrimino.x += -12
+                        tetrimino.y += 6
+                    } else if (tetriminoDirection == 3) {
+                        tetrimino.x += -6
+                        tetrimino.y += -12
+                    } else if (tetriminoDirection == 4) {
+                        tetrimino.x += 12
+                        tetrimino.y += -6
+                    }
+                    if (overlap_check()) {
+                        tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        if (tetriminoDirection == 1) {
+                            tetrimino.x += -12
+                            tetrimino.y += -6
+                        } else if (tetriminoDirection == 2) {
+                            tetrimino.x += 6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 3) {
+                            tetrimino.x += 12
+                            tetrimino.y += 6
+                        } else if (tetriminoDirection == 4) {
+                            tetrimino.x += -6
+                            tetrimino.y += 12
+                        }
+                        if (overlap_check()) {
+                            tetriminoDirection += -1
+                            if (tetriminoDirection == 0) {
+                                tetriminoDirection = 4
+                            }
+                            render_tetrimino()
+                            tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        }
+                    }
+                }
+            }
+        } else {
+            if (tetriminoDirection == 1 || tetriminoDirection == 2) {
+                tetrimino.x += -6
+            } else if (tetriminoDirection == 3 || tetriminoDirection == 4) {
+                tetrimino.x += 6
+            }
+            if (overlap_check()) {
+                tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                if (tetriminoDirection == 1) {
+                    tetrimino.x += -6
+                    tetrimino.y += 6
+                } else if (tetriminoDirection == 2) {
+                    tetrimino.x += -6
+                    tetrimino.y += -6
+                } else if (tetriminoDirection == 3) {
+                    tetrimino.x += 6
+                    tetrimino.y += 6
+                } else if (tetriminoDirection == 4) {
+                    tetrimino.x += 6
+                    tetrimino.y += -6
+                }
+                if (overlap_check()) {
+                    tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                    if (tetriminoDirection == 1 || tetriminoDirection == 3) {
+                        tetrimino.y += -12
+                    } else if (tetriminoDirection == 2 || tetriminoDirection == 4) {
+                        tetrimino.y += 12
+                    }
+                    if (overlap_check()) {
+                        tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        if (tetriminoDirection == 1) {
+                            tetrimino.x += -6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 2) {
+                            tetrimino.x += -6
+                            tetrimino.y += 12
+                        } else if (tetriminoDirection == 3) {
+                            tetrimino.x += 6
+                            tetrimino.y += -12
+                        } else if (tetriminoDirection == 4) {
+                            tetrimino.x += 6
+                            tetrimino.y += 12
+                        }
+                        if (overlap_check()) {
+                            tetriminoDirection += -1
+                            if (tetriminoDirection == 0) {
+                                tetriminoDirection = 4
+                            }
+                            render_tetrimino()
+                            tetrimino.setPosition(tetriminoRotationCheckX, tetriminoRotationCheckY)
+                        }
+                    }
+                }
+            }
+        }
+    }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     tetrimino.x += -6
-    if (tetrimino.overlapsWith(edges)) {
+    if (overlap_check()) {
         tetrimino.x += 6
-    }
-    for (let index = 0; index <= stackLocationsX.length - 1; index++) {
-        overlapCheck.setPosition(stackLocationsX[index] * 6 + 47, stackLocationsY[index] * 6 - 3)
-        if (overlapCheck.overlapsWith(tetrimino)) {
-            tetrimino.x += 6
-            break;
-        }
     }
 })
 function render_tetrimino () {
@@ -110,15 +345,8 @@ function render_tetrimino () {
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     tetrimino.x += 6
-    if (tetrimino.overlapsWith(edges)) {
+    if (overlap_check()) {
         tetrimino.x += -6
-    }
-    for (let index = 0; index <= stackLocationsX.length - 1; index++) {
-        overlapCheck.setPosition(stackLocationsX[index] * 6 + 47, stackLocationsY[index] * 6 - 3)
-        if (overlapCheck.overlapsWith(tetrimino)) {
-            tetrimino.x += -6
-            break;
-        }
     }
 })
 function generate_new_tetrimino () {
@@ -148,52 +376,65 @@ function generate_new_tetrimino () {
         tetrimino.x = 77
     }
 }
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    game.splash("Oh dang, you weren't supposed to click that!")
-    game.splash("But now that you have, I guess there's nothing I can do about it...")
-})
-function tetrimino_fallconvert () {
-    tetrimino.y += 6
+function overlap_check () {
     if (tetrimino.overlapsWith(edges)) {
-        tetrimino.y += -6
-        tetriminoConvert = 1
+        return 1
     }
     for (let index = 0; index <= stackLocationsX.length - 1; index++) {
         overlapCheck.setPosition(stackLocationsX[index] * 6 + 47, stackLocationsY[index] * 6 - 3)
         if (overlapCheck.overlapsWith(tetrimino)) {
-            tetrimino.y += -6
-            tetriminoConvert = 1
-            break;
+            return 1
         }
     }
-    if (tetriminoConvert) {
-        overlapCheck.y = 3
-        overlapCheckColumn = 1
-        for (let index = 0; index < 20; index++) {
-            overlapCheck.x = 47
-            overlapCheckRow = 0
-            for (let index = 0; index < 10; index++) {
-                overlapCheck.x += 6
-                overlapCheckRow += 1
-                if (overlapCheck.overlapsWith(tetrimino)) {
-                    stackLocationsX.push(overlapCheckRow)
-                    stackLocationsY.push(overlapCheckColumn)
-                    stackLocationsColor.push(tetriminoType)
-                }
+    return 0
+}
+function tetrimino_fallconvert () {
+    tetrimino.y += 6
+    if (overlap_check()) {
+        tetrimino.y += -6
+        overlapCheck.setPosition(47, -3)
+        for (let index2 = 0; index2 < 10; index2++) {
+            overlapCheck.x += 6
+            if (overlapCheck.overlapsWith(tetrimino)) {
+                tetriminoOverlapCheck = 500
             }
-            overlapCheck.y += 6
-            overlapCheckColumn += 1
         }
-        tetriminoConvert = 0
-        generate_new_tetrimino()
-        hardDrop = 1
+        if (tetriminoOverlapCheck == 500) {
+            // This MAY be temporary, but maybe not.
+            game.over(false)
+        } else {
+            overlapCheck.y = 3
+            overlapCheckColumn = 1
+            for (let index2 = 0; index2 < 20; index2++) {
+                overlapCheck.x = 47
+                overlapCheckRow = 0
+                for (let index2 = 0; index2 < 10; index2++) {
+                    overlapCheck.x += 6
+                    overlapCheckRow += 1
+                    if (overlapCheck.overlapsWith(tetrimino)) {
+                        stackLocationsX.push(overlapCheckRow)
+                        stackLocationsY.push(overlapCheckColumn)
+                        stackLocationsColor.push(tetriminoType)
+                    }
+                }
+                overlapCheck.y += 6
+                overlapCheckColumn += 1
+            }
+            generate_new_tetrimino()
+            hardDrop = 1
+        }
     }
 }
+let index = 0
+let columnCheckConfirm: number[] = []
+let columnCheck: number[] = []
 let overlapCheckRow = 0
 let overlapCheckColumn = 0
-let tetriminoConvert = 0
+let tetriminoOverlapCheck = 0
 let bagRandom = ""
 let tetriminoType = ""
+let tetriminoRotationCheckY = 0
+let tetriminoRotationCheckX = 0
 let tetriminoDirection = 0
 let hardDrop = 0
 let tetrimino: Sprite = null
@@ -209,8 +450,8 @@ edges.setFlag(SpriteFlag.Invisible, true)
 stackLocationsX = []
 stackLocationsY = []
 stackLocationsColor = []
-let stackTileColorOutline = 1
-let stackTileColorFill = 15
+let stackTileColorOutline = 13
+let stackTileColorFill = 1
 overlapCheck = sprites.create(assets.image`overlapCheck`, SpriteKind.Player)
 overlapCheck.setFlag(SpriteFlag.Invisible, true)
 bag = []
@@ -243,13 +484,62 @@ game.onUpdate(function () {
             stackTileColorFill = 4
         } else {
             // This is just here so I can see if there's an error in color
-            stackTileColorOutline = 1
-            stackTileColorFill = 15
+            stackTileColorOutline = 13
+            stackTileColorFill = 1
         }
         backdrop.fillRect(stackLocationsX[index] * 6 + 44, stackLocationsY[index] * 6 - 6, 6, 6, stackTileColorFill)
         backdrop.drawRect(stackLocationsX[index] * 6 + 44, stackLocationsY[index] * 6 - 6, 6, 6, stackTileColorOutline)
     }
     scene.setBackgroundImage(backdrop)
+})
+// This is the code that checks if a row should be removed, then remove that row.
+game.onUpdate(function () {
+    columnCheck = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+    ]
+    columnCheckConfirm = []
+    for (let value of stackLocationsY) {
+        columnCheck[value - 1] = columnCheck[value - 1] + 1
+    }
+    for (let index = 0; index <= 19; index++) {
+        if (columnCheck[index] == 10) {
+            columnCheckConfirm.push(index)
+            music.smallCrash.play()
+        }
+    }
+    for (let value of columnCheckConfirm) {
+        for (let index2 = 0; index2 < 10; index2++) {
+            stackLocationsX.removeAt(stackLocationsY.indexOf(value + 1))
+            stackLocationsColor.removeAt(stackLocationsY.indexOf(value + 1))
+            stackLocationsY.removeAt(stackLocationsY.indexOf(value + 1))
+        }
+        index = value
+        for (let index2 = 0; index2 < value; index2++) {
+            for (let index2 = 0; index2 < 10; index2++) {
+                stackLocationsY[stackLocationsY.indexOf(index)] = index + 1
+            }
+            index += -1
+        }
+    }
 })
 game.onUpdateInterval(50, function () {
     if (controller.down.isPressed()) {
