@@ -475,8 +475,8 @@ let tetriminoRotationCheckY = 0
 let tetriminoRotationCheckX = 0
 let tetriminoDirection = 0
 let hardDrop = 0
-let tetriminoGhost: Sprite = null
 let tetrimino: Sprite = null
+let tetriminoGhost: Sprite = null
 let bag: string[] = []
 let overlapCheck: Sprite = null
 let stackLocationsColor: string[] = []
@@ -494,8 +494,8 @@ let stackTileColorFill = 1
 overlapCheck = sprites.create(assets.image`overlapCheck`, SpriteKind.Player)
 overlapCheck.setFlag(SpriteFlag.Invisible, true)
 bag = []
-tetrimino = sprites.create(assets.image`O`, SpriteKind.Player)
 tetriminoGhost = sprites.create(assets.image`O-Ghost`, SpriteKind.Player)
+tetrimino = sprites.create(assets.image`O`, SpriteKind.Player)
 generate_new_tetrimino()
 // Render the stack
 game.onUpdate(function () {
